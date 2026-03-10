@@ -35,6 +35,7 @@ export const NAV_LINKS = [
   { name: 'Careers', path: '/careers' },
   { name: 'Contact', path: '/contact' },
   { name: 'Client Portal', path: '/client-dashboard' },
+  { name: 'Admin Panel', path: '/admin-dashboard' },
 ];
 
 export const SERVICES: ServiceItem[] = [
