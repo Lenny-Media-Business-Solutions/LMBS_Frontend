@@ -37,10 +37,13 @@ const PortfolioAdmin = lazy(() => import('./pages/admin/Portfolio'));
 
 // Scroll to top on route change component
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Only scroll to top if there's no hash (anchor link)
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 };
 

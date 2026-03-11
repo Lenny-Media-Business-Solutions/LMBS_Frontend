@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Megaphone, Palette, Camera, Monitor, Settings,
@@ -246,6 +246,7 @@ const DETAILED_SERVICES = [
 
 const Services: React.FC = () => {
   const [activeService, setActiveService] = useState(DETAILED_SERVICES[0].id);
+  const location = useLocation();
 
   // Smooth scroll handler
   const scrollToService = (id: string) => {
@@ -253,7 +254,7 @@ const Services: React.FC = () => {
     if (element) {
       const headerOffset = 100;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -284,16 +285,16 @@ const Services: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle hash navigation on mount
+  // Handle hash navigation
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
+    const hash = location.hash.replace('#', '');
     if (hash) {
       // Small delay to ensure the page is rendered
       setTimeout(() => {
         scrollToService(hash);
       }, 100);
     }
-  }, []);
+  }, [location.hash]);
 
   return (
     <div className="pt-20">
