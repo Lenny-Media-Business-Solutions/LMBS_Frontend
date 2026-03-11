@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, ShieldCheck } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
 
 import logo from '../assets/images/Lmbs_logo.png';
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-center bg-navy-950/50 backdrop-blur-md px-3 py-2 rounded-full border border-white/10 mr-2 2xl:mr-4 shadow-xl">
                 {NAV_LINKS.map((link) => {
                   const isDashboard = link.path.includes('dashboard');
-                  let linkClasses = "relative px-3 2xl:px-4 py-2 text-[10px] 2xl:text-xs transition-all rounded-full whitespace-nowrap font-heading font-semibold tracking-wide flex items-center gap-1.5 ";
+                  let linkClasses = "relative px-3 2xl:px-4 py-2 text-[11px] lg:text-[13px] 2xl:text-sm transition-all rounded-full whitespace-nowrap font-heading font-semibold tracking-wide flex items-center gap-1.5 ";
 
                   if (location.pathname === link.path) {
                     linkClasses += "text-navy-900 bg-gold-500 shadow-[0_0_15px_rgba(245,158,11,0.5)] transform scale-105";
@@ -80,8 +80,7 @@ const Navbar: React.FC = () => {
                       to={link.path}
                       className={linkClasses}
                     >
-                      {link.name === 'Client Portal' && <User size={10} />}
-                      {link.name === 'Admin Panel' && <ShieldCheck size={10} />}
+                      {link.name === 'Client Portal' && <User size={12} />}
                       {link.name}
                     </Link>
                   );
@@ -90,7 +89,7 @@ const Navbar: React.FC = () => {
 
               <Link
                 to="/quote"
-                className="relative overflow-hidden bg-gradient-to-r from-gold-500 to-orange-500 text-white px-4 2xl:px-5 py-2.5 rounded-full font-heading font-bold text-[10px] 2xl:text-xs transition-all hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] transform hover:scale-105 shrink-0 border border-white/20"
+                className="relative overflow-hidden bg-gradient-to-r from-gold-500 to-orange-500 text-white px-5 py-2.5 rounded-full font-heading font-bold text-[12px] lg:text-[13px] 2xl:text-sm transition-all hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] transform hover:scale-105 shrink-0 border border-white/20"
               >
                 <span className="relative z-10">Get a Quote</span>
                 <div className="absolute inset-0 bg-white/20 transform -translate-x-full hover:translate-x-0 transition-transform duration-300"></div>
@@ -128,7 +127,6 @@ const Navbar: React.FC = () => {
                     }`}
                 >
                   {link.name === 'Client Portal' && <User size={18} />}
-                  {link.name === 'Admin Panel' && <ShieldCheck size={18} />}
                   {link.name}
                 </Link>
               );
