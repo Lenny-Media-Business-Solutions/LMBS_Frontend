@@ -3,6 +3,8 @@ import { adminService } from '../services/adminApi';
 import { PortfolioItem as PortfolioItemType } from '../types';
 import { AlertCircle, Loader2, Maximize, ExternalLink } from 'lucide-react';
 import MediaLightbox from '../components/MediaLightbox';
+import { optimizeCloudinaryUrl } from '../services/cloudinary';
+
 
 // Internal component to handle individual image loading states
 const PortfolioItemCard: React.FC<{ item: PortfolioItemType; onClick: (item: PortfolioItemType) => void }> = ({ item, onClick }) => {
@@ -21,7 +23,7 @@ const PortfolioItemCard: React.FC<{ item: PortfolioItemType; onClick: (item: Por
 
       {isVideo ? (
         <video
-          src={item.image}
+          src={optimizeCloudinaryUrl(item.image)}
           className={`w-full h-full object-contain transition-all duration-700 ease-in-out group-hover:scale-105 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'}`}
           onLoadedData={() => setIsLoaded(true)}
           autoPlay

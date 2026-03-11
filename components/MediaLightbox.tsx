@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { X, ExternalLink } from 'lucide-react';
 import { PortfolioItem as PortfolioItemType } from '../types';
+import { optimizeCloudinaryUrl } from '../services/cloudinary';
+
 
 interface MediaLightboxProps {
     item: PortfolioItemType | null;
@@ -51,7 +53,7 @@ const MediaLightbox: React.FC<MediaLightboxProps> = ({ item, onClose }) => {
             >
                 {isVideo ? (
                     <video
-                        src={item.image}
+                        src={optimizeCloudinaryUrl(item.image)}
                         className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
                         controls
                         autoPlay
