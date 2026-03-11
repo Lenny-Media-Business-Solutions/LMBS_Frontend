@@ -32,7 +32,10 @@ const MediaLightbox: React.FC<MediaLightboxProps> = ({ item, onClose }) => {
 
     if (!item) return null;
 
-    const isVideo = item.image?.toLowerCase().match(/\.(mp4|webm|ogg)$/);
+    const isVideo = item.image?.toLowerCase().match(/\.(mp4|webm|ogg|m4v)$/) || 
+                    item.category?.toLowerCase() === 'videography' ||
+                    item.image?.includes('/video/upload/');
+
 
     return (
         <div

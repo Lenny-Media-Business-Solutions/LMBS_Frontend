@@ -9,7 +9,10 @@ import { optimizeCloudinaryUrl } from '../services/cloudinary';
 // Internal component to handle individual image loading states
 const PortfolioItemCard: React.FC<{ item: PortfolioItemType; onClick: (item: PortfolioItemType) => void }> = ({ item, onClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const isVideo = item.image?.toLowerCase().match(/\.(mp4|webm|ogg)$/);
+  const isVideo = item.image?.toLowerCase().match(/\.(mp4|webm|ogg|m4v)$/) || 
+                  item.category?.toLowerCase() === 'videography' ||
+                  item.image?.includes('/video/upload/');
+
 
   return (
     <div
