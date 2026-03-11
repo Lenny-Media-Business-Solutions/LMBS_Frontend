@@ -284,6 +284,17 @@ const Services: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle hash navigation on mount
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      // Small delay to ensure the page is rendered
+      setTimeout(() => {
+        scrollToService(hash);
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="pt-20">
       {/* Hero Section */}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
-import { COMPANY_NAME, COMPANY_LOCATION, COMPANY_EMAIL, COMPANY_PHONE, NAV_LINKS } from '../constants';
+import { COMPANY_NAME, COMPANY_LOCATION, COMPANY_EMAIL, COMPANY_PHONE, NAV_LINKS, SERVICES } from '../constants';
 
 const TikTokIcon = ({ size = 20 }: { size?: number }) => (
   <svg
@@ -55,15 +55,16 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="text-lg font-bold text-white mb-6">Services</h4>
             <ul className="space-y-3">
-              <li><Link to="/services" className="hover:text-gold-500 transition-colors">Branding & Design</Link></li>
-              <li><Link to="/services" className="hover:text-gold-500 transition-colors">Social Media Marketing</Link></li>
-              <li><Link to="/services" className="hover:text-gold-500 transition-colors">Web Development</Link></li>
-              <li><Link to="/services" className="hover:text-gold-500 transition-colors">Video Production</Link></li>
-              <li><Link to="/services" className="hover:text-gold-500 transition-colors">Digital Strategy</Link></li>
+              {SERVICES.filter(service => service.id !== 'academic-writing').slice(0, 6).map(service => (
+                <li key={service.id}>
+                  <Link to={`/services#${service.id}`} className="hover:text-gold-500 transition-colors">
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
