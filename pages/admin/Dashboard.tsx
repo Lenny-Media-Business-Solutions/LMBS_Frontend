@@ -89,7 +89,7 @@ const Dashboard = () => {
             bgColor: 'bg-blue-50',
             growth: formatGrowth(stats.usersGrowth),
             trend: stats.usersGrowth >= 0 ? 'up' : 'down',
-            path: '/admin/dashboard/users'
+            path: '/secure-admin-7090/dashboard/users'
         },
         {
             label: 'Quotes',
@@ -99,7 +99,7 @@ const Dashboard = () => {
             bgColor: 'bg-gold-50',
             growth: formatGrowth(stats.quotesGrowth),
             trend: stats.quotesGrowth >= 0 ? 'up' : 'down',
-            path: '/admin/dashboard/quotes'
+            path: '/secure-admin-7090/dashboard/quotes'
         },
         {
             label: 'Contact Inquiries',
@@ -109,7 +109,7 @@ const Dashboard = () => {
             bgColor: 'bg-green-50',
             growth: formatGrowth(stats.contactsGrowth),
             trend: stats.contactsGrowth >= 0 ? 'up' : 'down',
-            path: '/admin/dashboard/contacts'
+            path: '/secure-admin-7090/dashboard/contacts'
         },
         {
             label: 'Active Projects',
@@ -119,13 +119,13 @@ const Dashboard = () => {
             bgColor: 'bg-teal-50',
             growth: formatGrowth(stats.projectsGrowth),
             trend: stats.projectsGrowth >= 0 ? 'up' : 'down',
-            path: '/admin/dashboard/projects'
+            path: '/secure-admin-7090/dashboard/projects'
         },
     ];
 
     const secondaryStats = [
-        { label: 'Jobs', value: stats.jobs, icon: Briefcase, color: 'text-purple-500', path: '/admin/dashboard/jobs' },
-        { label: 'Applications', value: stats.applications, icon: ClipboardList, color: 'text-orange-500', path: '/admin/dashboard/applications' },
+        { label: 'Jobs', value: stats.jobs, icon: Briefcase, color: 'text-purple-500', path: '/secure-admin-7090/dashboard/jobs' },
+        { label: 'Applications', value: stats.applications, icon: ClipboardList, color: 'text-orange-500', path: '/secure-admin-7090/dashboard/applications' },
     ];
 
     return (

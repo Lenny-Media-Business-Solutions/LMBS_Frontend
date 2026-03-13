@@ -83,9 +83,9 @@ const App: React.FC = () => {
           <div className="flex flex-col min-h-screen font-sans bg-white text-navy-900 selection:bg-gold-200 selection:text-navy-900">
             <Routes>
               {/* Admin Routes */}
-              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/secure-admin-7090/login" element={<AdminLogin />} />
 
-              <Route path="/admin" element={<ProtectedRoute />}>
+              <Route path="/secure-admin-7090" element={<ProtectedRoute />}>
                 <Route element={<AdminLayout />}>
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="dashboard/users" element={<Users />} />

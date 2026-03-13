@@ -41,7 +41,7 @@ adminApi.interceptors.response.use(
             // For now, we'll just logout
             localStorage.removeItem('accessToken');
             localStorage.removeItem('userRole');
-            window.location.href = '/admin/login'; // Updated to match new BrowserRouter paths
+            window.location.href = '/secure-admin-7090/login'; // Updated to match new BrowserRouter paths
         }
         return Promise.reject(error);
     }
@@ -55,8 +55,19 @@ export const adminService = {
         return response.data;
     },
 
+    verifyOTP: async (data: { user_id: number; otp: string }) => {
+        // Verify OTP is under /v1/user/verify-otp/
+        const response = await axios.post(`${ROOT_API_URL}/v1/user/verify-otp/`, data);
+        return response.data;
+    },
+
+    changePassword: async (data: any) => {
+        const response = await adminApi.post('/v1/user/profile/change-password/', data);
+        return response.data;
+    },
+
     getUsers: async () => {
-        // Admin routes are at /admin/... (mapped to api/admin/)
+        // Admin routes are at /api/admin/...
         // So we use adminApi.get('/admin/users/') -> ROOT_API_URL + /admin/users/
         const response = await adminApi.get('/admin/users/');
         return response.data;

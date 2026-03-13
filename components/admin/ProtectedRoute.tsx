@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/admin/login" replace />;
+        return <Navigate to="/secure-admin-7090/login" replace />;
     }
 
     if (role !== 'ADMIN') {

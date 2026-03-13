@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -12,42 +12,45 @@ import {
     Briefcase,
     ClipboardList,
     Layers,
-    ChevronRight
+    ChevronRight,
+    KeyRound
 } from 'lucide-react';
 import Navbar from '../Navbar';
+import ChangePasswordModal from './ChangePasswordModal';
 
 const AdminLayout = () => {
     const { logout, user } = useAuth();
     const navigate = useNavigate();
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
     const handleLogout = () => {
         logout();
-        navigate('/admin/login');
+        navigate('/secure-admin-7090/login');
     };
 
     const navSections = [
         {
             title: 'Main',
             items: [
-                { path: '/admin/dashboard', icon: LayoutDashboard, label: 'Overview', end: true },
-                { path: '/admin/dashboard/users', icon: Users, label: 'Users' },
+                { path: '/secure-admin-7090/dashboard', icon: LayoutDashboard, label: 'Overview', end: true },
+                { path: '/secure-admin-7090/dashboard/users', icon: Users, label: 'Users' },
             ]
         },
         {
             title: 'CRM',
             items: [
-                { path: '/admin/dashboard/contacts', icon: MessageSquare, label: 'Contact Inquiries' },
-                { path: '/admin/dashboard/quotes', icon: FileText, label: 'Quote Requests' },
+                { path: '/secure-admin-7090/dashboard/contacts', icon: MessageSquare, label: 'Contact Inquiries' },
+                { path: '/secure-admin-7090/dashboard/quotes', icon: FileText, label: 'Quote Requests' },
             ]
         },
 
         {
             title: 'Operations',
             items: [
-                { path: '/admin/dashboard/projects', icon: Layers, label: 'Client Projects' },
-                { path: '/admin/dashboard/portfolio', icon: LayoutDashboard, label: 'Portfolio Gallery' },
-                { path: '/admin/dashboard/jobs', icon: Briefcase, label: 'Job Listings' },
-                { path: '/admin/dashboard/applications', icon: ClipboardList, label: 'Job Applications' },
+                { path: '/secure-admin-7090/dashboard/projects', icon: Layers, label: 'Client Projects' },
+                { path: '/secure-admin-7090/dashboard/portfolio', icon: LayoutDashboard, label: 'Portfolio Gallery' },
+                { path: '/secure-admin-7090/dashboard/jobs', icon: Briefcase, label: 'Job Listings' },
+                { path: '/secure-admin-7090/dashboard/applications', icon: ClipboardList, label: 'Job Applications' },
             ]
         }
     ];
@@ -101,14 +104,18 @@ const AdminLayout = () => {
 
                     <div className="p-8 border-t border-white/5 mt-auto">
                         {user && (
-                            <div className="flex items-center gap-3 mb-6 px-2">
-                                <div className="w-8 h-8 rounded-full bg-navy-800 border border-white/10 flex items-center justify-center text-xs font-bold text-teal-400 uppercase">
+                            <div
+                                onClick={() => setIsPasswordModalOpen(true)}
+                                className="flex items-center gap-3 mb-6 p-3 hover:bg-white/5 rounded-2xl cursor-pointer transition-colors group relative"
+                            >
+                                <div className="w-10 h-10 rounded-xl bg-navy-800 border border-white/10 flex items-center justify-center text-sm font-bold text-teal-400 uppercase shadow-inner relative overflow-hidden group-hover:bg-navy-700 transition-colors">
                                     {user.username?.[0] || 'A'}
                                 </div>
-                                <div className="overflow-hidden">
-                                    <p className="text-xs font-bold truncate">{user.username}</p>
-                                    <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
+                                <div className="overflow-hidden flex-1">
+                                    <p className="text-sm font-bold truncate text-white/90 group-hover:text-white">{user.username}</p>
+                                    <p className="text-[10px] text-gray-500 truncate group-hover:text-gray-400">Change Password</p>
                                 </div>
+                                <KeyRound size={16} className="text-gray-500 group-hover:text-teal-400 transition-colors right-3 absolute" />
                             </div>
                         )}
                         <button
@@ -143,8 +150,13 @@ const AdminLayout = () => {
                         </div>
                     </div>
                 </main>
-            </div >
-        </div >
+            </div>
+
+            <ChangePasswordModal
+                isOpen={isPasswordModalOpen}
+                onClose={() => setIsPasswordModalOpen(false)}
+            />
+        </div>
     );
 };
 

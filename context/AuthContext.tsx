@@ -12,7 +12,8 @@ interface AuthContextType {
     token: string | null;
     role: string | null;
     isAuthenticated: boolean;
-    login: (credentials: any) => Promise<void>;
+    login: (credentials: any) => Promise<any>; // Changed to return data
+    verifyOTP: (data: { user_id: number; otp: string }) => Promise<void>;
     logout: () => void;
     isLoading: boolean;
 }
@@ -35,30 +36,49 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setIsLoading(true);
         try {
             const data = await adminService.login(credentials);
-            // Assuming response structure: { access: '...', user: { role: 'ADMIN', ... } }
-            // Adjust based on actual backend response
-
-            const accessToken = data.access || data.token;
-            const userRole = data.user?.role || data.role; // Fallback
-
-            if (userRole !== 'ADMIN') {
-                throw new Error('Access denied. Admin rights required.');
+            if (data['2fa_required']) {
+                return data; // Return to component to handle OTP step
             }
 
-            setToken(accessToken);
-            setRole(userRole);
-            setUser(data.user);
-
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('userRole', userRole);
-            if (data.user) {
-                localStorage.setItem('userData', JSON.stringify(data.user));
-            }
+            handleLoginSuccess(data);
+            return data;
         } catch (error) {
             console.error("Login failed", error);
             throw error;
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const verifyOTP = async (otpData: { user_id: number; otp: string }) => {
+        setIsLoading(true);
+        try {
+            const data = await adminService.verifyOTP(otpData);
+            handleLoginSuccess(data);
+        } catch (error) {
+            console.error("OTP Verification failed", error);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleLoginSuccess = (data: any) => {
+        const accessToken = data.access || data.token;
+        const userRole = data.user?.role || data.role;
+
+        if (userRole !== 'ADMIN') {
+            throw new Error('Access denied. Admin rights required.');
+        }
+
+        setToken(accessToken);
+        setRole(userRole);
+        setUser(data.user);
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('userRole', userRole);
+        if (data.user) {
+            localStorage.setItem('userData', JSON.stringify(data.user));
         }
     };
 
@@ -78,6 +98,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             role,
             isAuthenticated: !!token,
             login,
+            verifyOTP,
             logout,
             isLoading
         }}>
