@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
+import { Instagram, MapPin, Phone, Mail } from 'lucide-react';
+// import { Facebook, Twitter, Linkedin } from 'lucide-react';
 import { COMPANY_NAME, COMPANY_LOCATION, COMPANY_EMAIL, COMPANY_PHONE, NAV_LINKS, SERVICES } from '../constants';
 
 const TikTokIcon = ({ size = 20 }: { size?: number }) => (
@@ -33,10 +34,10 @@ const Footer: React.FC = () => {
               We create digital experiences that transform businesses. From Juja to the world, we are your partners in growth.
             </p>
             <div className="flex space-x-4">
-              <a href={import.meta.env.VITE_FACEBOOK_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Facebook size={20} /></a>
+              {/* <a href={import.meta.env.VITE_FACEBOOK_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Facebook size={20} /></a> */}
               <a href={import.meta.env.VITE_INSTAGRAM_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Instagram size={20} /></a>
-              <a href={import.meta.env.VITE_TWITTER_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Twitter size={20} /></a>
-              <a href={import.meta.env.VITE_LINKEDIN_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Linkedin size={20} /></a>
+              {/* <a href={import.meta.env.VITE_TWITTER_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Twitter size={20} /></a> */}
+              {/* <a href={import.meta.env.VITE_LINKEDIN_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><Linkedin size={20} /></a> */}
               <a href={import.meta.env.VITE_TIKTOK_URL || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-gold-500 transition-colors"><TikTokIcon size={20} /></a>
             </div>
           </div>
